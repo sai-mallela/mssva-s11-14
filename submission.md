@@ -136,17 +136,19 @@ This bootcamp follows a research snapshot submission model. Participants must no
 
 ## Submission Steps
 
-1. **Fork the Repository**  
-   - Go to the main repository on GitHub and click **Fork** to create a copy under your account.  
+1. **Fork the Repository** 
+   - Go to the main repository on GitHub and click **Fork** to create a copy under your account. 
    - Your fork **must be public** so the automated verification workflow can access it.
 
-2. **Clone Your Fork**  
+2. **Clone Your Fork** 
 ```bash
 git clone <your-fork-url>
 cd <repository-name>
-
+```
 3.
+```bash
 git checkout -b <your-username>-submission
+```
 4.
 ```text
 Prepare Your Submission Folder
@@ -162,13 +164,15 @@ Any instrumentation or analysis files
 Do not modify core application logic outside submission/
 ```
 5.
+```bash
 git add submission-mssva/
 git commit -m "Submission by <your-username>"
-
+```
 6.
+```bash
 git tag submission-<your-username>
 git push origin submission-<your-username>
-
+```
 ## @Final Note
 Security is not a black-box toolchain.
 
