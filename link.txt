@@ -1,5 +1,5 @@
 https://chatgpt.com/c/6940f3b8-e280-8329-9d9e-81e45df96a27
-https://chatgpt.com/c/6940f3b8-e280-8329-9d9e-81e45df96a27
+
 STEP 1: Open the project in VS Code (CORRECT WAY)
 From this directory, run:
 code .
