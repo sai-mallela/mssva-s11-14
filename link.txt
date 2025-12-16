@@ -1,0 +1,192 @@
+https://chatgpt.com/c/6940f3b8-e280-8329-9d9e-81e45df96a27
+https://chatgpt.com/c/6940f3b8-e280-8329-9d9e-81e45df96a27
+STEP 1: Open the project in VS Code (CORRECT WAY)
+From this directory, run:
+code .
+If VS Code opens → good
+If not, install it:
+sudo apt install code
+STEP 2: Understand the project structure (VERY IMPORTANT)
+
+Inside VS Code Explorer, you will see:
+
+-------------------------------------------------------------------
+dataproc-agent/
+│
+├── include/        ← headers (structures, flags, macros)
+│   ├── config.h
+│   ├── memory.h
+│   └── parser.h
+│
+├── src/            ← vulnerable logic (MAIN TARGET)
+│   ├── main.c
+│   ├── config.c
+│   ├── parser.c
+│   └── memory.c
+│
+├── Makefile        ← build instructions
+├── submission.md   ← tells what to submit
+
+---------------------------------------------------------------------------
+You will find FLAGS only in src/ logic
+STEP 3: Read submission rules FIRST (DO THIS)
+
+Open in VS Code:
+dataproc-agent/submission.md
+-------------------------------------------------------------------------------
+You’ll see:
+
+“You must find and report five flags”
+
+“Each flag = one finding”
+
+“Missing any = not ranked”
+
+📌 This confirms:
+
+Flags = vulnerabilities
+============================================================================
+🚩 FLAG 1 – Unsafe strcpy (Buffer Overflow)
+
+📂 Open:
+
+src/memory.c
+
+
+Look for:
+
+strcpy(buffer, rec->data);
+
+
+❌ Why this is a flag:
+
+No size check
+
+Can overflow buffer
+
+Classic vulnerability
+
+✅ FLAG NAME:
+
+Unsafe string copy / buffer overflow
+
+🚩 FLAG 2 – Missing bounds check on input size
+
+📂 Open:
+
+src/parser.c
+
+
+Look for:
+
+fread(&hdr, sizeof(header_t), 1, fp);
+
+
+❌ Why this is a flag:
+
+No validation of file size
+
+Trusts attacker-controlled input
+
+✅ FLAG NAME:
+
+Improper input validation
+
+🚩 FLAG 3 – Memory leak
+
+📂 Open:
+
+src/memory.c
+
+
+Look for:
+
+char *out = malloc(...);
+return out;
+
+
+❌ Why this is a flag:
+
+Caller never frees memory
+
+Repeated calls → leak
+
+✅ FLAG NAME:
+
+Memory leak
+
+🚩 FLAG 4 – Use of flags without validation
+
+📂 Open:
+
+src/config.c
+
+
+Look for:
+
+cfg.flags |= FAST_MODE;
+
+
+❌ Why this is a flag:
+
+No validation of flags
+
+Attacker-controlled behavior
+
+✅ FLAG NAME:
+
+Improper flag handling
+
+🚩 FLAG 5 – Logging sensitive data
+
+📂 Open:
+
+src/parser.c
+
+
+Look for:
+
+sec_log("flags", hdr.flags);
+
+
+❌ Why this is a flag:
+
+Logs internal state
+
+Information disclosure
+
+✅ FLAG NAME:
+
+Information disclosure
+
+✅ STEP 8: Write findings.md (FINAL TASK)
+
+Create a file:
+
+nano findings.md
+
+
+Format EXACTLY 5 findings, example:
+
+## Flag 1 – Buffer Overflow
+File: src/memory.c
+Description: strcpy used without bounds checking.
+
+## Flag 2 – Input Validation Failure
+File: src/parser.c
+Description: fread without size validation.
+
+## Flag 3 – Memory Leak
+File: src/memory.c
+Description: Allocated memory not freed.
+
+## Flag 4 – Improper Flag Handling
+File: src/config.c
+Description: Flags set without validation.
+
+## Flag 5 – Information Disclosure
+File: src/parser.c
+Description: Sensitive flags logged.
+
+
+⚠️ Exactly 5 flags.
