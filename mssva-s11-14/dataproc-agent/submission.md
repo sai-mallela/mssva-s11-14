@@ -90,7 +90,7 @@ Findings Format (Exact)
 Your findings.md must contain exactly five findings, one per flag.
 
 Each finding must follow:
-
+```text
 Title:
 Flag:
 Location (file:function):
@@ -99,7 +99,7 @@ Trigger Condition:
 Root Cause:
 Impact:
 Evidence:
-
+```
 ## Submission Mechanism (Required)
 
 To verify authenticity, your submission must include at least one of the following:
