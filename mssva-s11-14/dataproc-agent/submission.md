@@ -138,6 +138,40 @@ Tool output without explanation
 Generic vulnerability descriptions
 
 
+# Submission Instructions — MSSVA Security Investigation
+
+This bootcamp follows a **research snapshot submission model**. 
+Participants must not push code back to the original repository.
+
+---
+
+## Submission Method
+
+You will submit your work by creating a **Git tag** in your forked repository.
+
+Only the tagged snapshot will be evaluated.
+
+---
+
+## Submission Steps
+
+1. Fork this repository to your GitHub account 
+   The fork must be public.
+
+2. Complete the security investigation in your fork 
+   - Analyze the `dataproc-agent` implementation
+   - Add instrumentation or analysis files where required 
+     (do not modify core application logic)
+   - Identify and explain all investigation flags
+   - Document all findings in `submission.md`
+
+3. Create and push the submission tag from the repository root:
+
+   ```bash
+   git tag submission-mssva
+   git push origin submission-mssva
+
+
 ## @Final Note
 
 Security is not a black-box toolchain.
